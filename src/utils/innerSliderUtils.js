@@ -31,13 +31,13 @@ export const lazyEndIndex = spec => spec.currentSlide + lazySlidesOnRight(spec);
 export const lazySlidesOnLeft = spec =>
   spec.centerMode
     ? Math.floor(spec.slidesToShow / 2) +
-      (parseInt(spec.centerPadding) > 0 ? 1 : 0)
+    (parseInt(spec.centerPadding) > 0 ? 1 : 0)
     : 0;
 export const lazySlidesOnRight = spec =>
   spec.centerMode
     ? Math.floor((spec.slidesToShow - 1) / 2) +
-      1 +
-      (parseInt(spec.centerPadding) > 0 ? 1 : 0)
+    1 +
+    (parseInt(spec.centerPadding) > 0 ? 1 : 0)
     : spec.slidesToShow;
 
 // get width of an element
@@ -114,15 +114,11 @@ export const initializedState = spec => {
   } else {
     slideWidth = listWidth;
   }
-
-  let slideHeight;
-  try {
-    slideHeight = getHeight(
+  let slideHeight =
+    ReactDOM.findDOMNode(spec.listRef) &&
+    getHeight(
       ReactDOM.findDOMNode(spec.listRef).querySelector('[data-index="0"]')
     );
-  } catch (err) {
-    slideHeight = null;
-  }
   let listHeight = slideHeight * spec.slidesToShow;
   let currentSlide =
     spec.currentSlide === undefined ? spec.initialSlide : spec.currentSlide;
@@ -217,9 +213,9 @@ export const slideHandler = spec => {
       animationLeft = finalLeft;
     }
     lazyLoad &&
-      lazyLoadedList.concat(
-        getOnDemandLazySlides({ ...spec, currentSlide: animationSlide })
-      );
+    lazyLoadedList.concat(
+      getOnDemandLazySlides({ ...spec, currentSlide: animationSlide })
+    );
     if (!useCSS) {
       state = {
         currentSlide: finalSlide,
@@ -785,11 +781,11 @@ export const siblingDirection = spec => {
 };
 
 export const slidesOnRight = ({
-  slidesToShow,
-  centerMode,
-  rtl,
-  centerPadding
-}) => {
+                                slidesToShow,
+                                centerMode,
+                                rtl,
+                                centerPadding
+                              }) => {
   // returns no of slides on the right of active slide
   if (centerMode) {
     let right = (slidesToShow - 1) / 2 + 1;
@@ -804,11 +800,11 @@ export const slidesOnRight = ({
 };
 
 export const slidesOnLeft = ({
-  slidesToShow,
-  centerMode,
-  rtl,
-  centerPadding
-}) => {
+                               slidesToShow,
+                               centerMode,
+                               rtl,
+                               centerPadding
+                             }) => {
   // returns no of slides on the left of active slide
   if (centerMode) {
     let left = (slidesToShow - 1) / 2 + 1;
