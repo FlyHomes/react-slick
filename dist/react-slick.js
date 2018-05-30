@@ -1801,7 +1801,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  } else {
 	    slideWidth = listWidth;
 	  }
-	  var slideHeight = getHeight(_reactDom2.default.findDOMNode(spec.listRef).querySelector('[data-index="0"]'));
+	  var slideHeight = void 0;
+	  try {
+	    slideHeight = getHeight(_reactDom2.default.findDOMNode(spec.listRef).querySelector('[data-index="0"]'));
+	  } catch (err) {
+	    slideHeight = 0;
+	  }
 	  var listHeight = slideHeight * spec.slidesToShow;
 	  var currentSlide = spec.currentSlide || spec.initialSlide;
 	  if (spec.rtl && !spec.currentSlide) {
