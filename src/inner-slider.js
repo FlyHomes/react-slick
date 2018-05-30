@@ -106,7 +106,7 @@ export var InnerSlider = createReactClass({
   },
   componentDidUpdate: function () {
     let images = document.querySelectorAll('.slick-slide img')
-    images.forEach(image => {
+    Array.prototype.forEach.call(images, image => {
       if (!image.onload) {
         image.onload = () => setTimeout(() => this.update(this.props), this.props.speed)
       }
