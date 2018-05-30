@@ -425,7 +425,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _this3 = this;
 
 	    var images = document.querySelectorAll('.slick-slide img');
-	    images.forEach(function (image) {
+	    Array.prototype.forEach.call(images, function (image) {
 	      if (!image.onload) {
 	        image.onload = function () {
 	          return setTimeout(function () {
