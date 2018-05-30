@@ -117,9 +117,14 @@ export const initializedState = spec => {
   } else {
     slideWidth = listWidth
   }
-  let slideHeight = getHeight(
-    ReactDOM.findDOMNode(spec.listRef).querySelector('[data-index="0"]')
-  )
+  let slideHeight;
+  try {
+    slideHeight = getHeight(
+      ReactDOM.findDOMNode(spec.listRef).querySelector('[data-index="0"]')
+    )
+  } catch (err) {
+    slideHeight = 0;
+  }
   let listHeight = slideHeight * spec.slidesToShow
   let currentSlide = spec.currentSlide || spec.initialSlide
   if (spec.rtl && !spec.currentSlide) {
