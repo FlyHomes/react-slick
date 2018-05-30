@@ -436,12 +436,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	      });
 	      _this.ro.observe(_this.list);
-	      var slides = document.querySelectorAll(".slick-slide");
-	      for (var i = 0; i < slides.length; i++) {
-	        var slide = slides[i];
+	      Array.prototype.forEach.call(document.querySelectorAll(".slick-slide"), function (slide) {
 	        slide.onfocus = _this.props.pauseOnFocus ? _this.onSlideFocus : null;
 	        slide.onblur = _this.props.pauseOnFocus ? _this.onSlideBlur : null;
-	      }
+	      });
 	      // To support server-side rendering
 	      if (!window) {
 	        return;
@@ -646,9 +644,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var images = document.querySelectorAll(".slick-slide img");
 	      var imagesCount = images.length,
 	          loadedCount = 0;
-
-	      var _loop = function _loop(i) {
-	        var image = images[i];
+	      Array.prototype.forEach.call(images, function (image) {
 	        var handler = function handler() {
 	          return ++loadedCount && loadedCount >= imagesCount && _this.onWindowResized();
 	        };
@@ -677,11 +673,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            };
 	          }
 	        }
-	      };
-
-	      for (var i = 0; i < imagesCount; i++) {
-	        _loop(i);
-	      }
+	      });
 	    };
 
 	    _this.progressiveLazyLoad = function () {

@@ -90,12 +90,13 @@ export class InnerSlider extends React.Component {
       }
     });
     this.ro.observe(this.list);
-    const slides = document.querySelectorAll(".slick-slide");
-    for (let i=0; i < slides.length; i++) {
-      const slide = slides[i];
-      slide.onfocus = this.props.pauseOnFocus ? this.onSlideFocus : null;
-      slide.onblur = this.props.pauseOnFocus ? this.onSlideBlur : null;
-    }
+    Array.prototype.forEach.call(
+      document.querySelectorAll(".slick-slide"),
+      slide => {
+        slide.onfocus = this.props.pauseOnFocus ? this.onSlideFocus : null;
+        slide.onblur = this.props.pauseOnFocus ? this.onSlideBlur : null;
+      }
+    );
     // To support server-side rendering
     if (!window) {
       return;
@@ -298,8 +299,7 @@ export class InnerSlider extends React.Component {
     let images = document.querySelectorAll(".slick-slide img");
     let imagesCount = images.length,
       loadedCount = 0;
-    for (let i=0; i < imagesCount; i++) {
-      const image = images[i];
+    Array.prototype.forEach.call(images, image => {
       const handler = () =>
         ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
       if (!image.onclick) {
@@ -327,7 +327,7 @@ export class InnerSlider extends React.Component {
           };
         }
       }
-    }
+    });
   };
   progressiveLazyLoad = () => {
     let slidesToLoad = [];
