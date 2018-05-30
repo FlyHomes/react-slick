@@ -90,13 +90,12 @@ export class InnerSlider extends React.Component {
       }
     });
     this.ro.observe(this.list);
-    Array.prototype.forEach.call(
-      document.querySelectorAll(".slick-slide"),
-      slide => {
-        slide.onfocus = this.props.pauseOnFocus ? this.onSlideFocus : null;
-        slide.onblur = this.props.pauseOnFocus ? this.onSlideBlur : null;
-      }
-    );
+    const slides = document.querySelectorAll(".slick-slide");
+    for (let i=0; i < slides.length; i++) {
+      const slide = slides[i];
+      slide.onfocus = this.props.pauseOnFocus ? this.onSlideFocus : null;
+      slide.onblur = this.props.pauseOnFocus ? this.onSlideBlur : null;
+    }
     // To support server-side rendering
     if (!window) {
       return;
@@ -156,7 +155,7 @@ export class InnerSlider extends React.Component {
         this.changeSlide({
           message: "index",
           index:
-            React.Children.count(nextProps.children) - nextProps.slidesToShow,
+          React.Children.count(nextProps.children) - nextProps.slidesToShow,
           currentSlide: this.state.currentSlide
         });
       }
@@ -222,7 +221,7 @@ export class InnerSlider extends React.Component {
     if (
       setTrackStyle ||
       React.Children.count(this.props.children) !==
-        React.Children.count(spec.children)
+      React.Children.count(spec.children)
     ) {
       updatedState["trackStyle"] = trackStyle;
     }
@@ -266,7 +265,7 @@ export class InnerSlider extends React.Component {
         let currentWidth = `${childrenWidths[this.state.currentSlide]}px`;
         trackStyle.left = `calc(${
           trackStyle.left
-        } + (100% - ${currentWidth}) / 2 ) `;
+          } + (100% - ${currentWidth}) / 2 ) `;
       }
       this.setState({
         trackStyle
@@ -299,7 +298,8 @@ export class InnerSlider extends React.Component {
     let images = document.querySelectorAll(".slick-slide img");
     let imagesCount = images.length,
       loadedCount = 0;
-    Array.prototype.forEach.call(images, image => {
+    for (let i=0; i < imagesCount; i++) {
+      const image = images[i];
       const handler = () =>
         ++loadedCount && loadedCount >= imagesCount && this.onWindowResized();
       if (!image.onclick) {
@@ -327,7 +327,7 @@ export class InnerSlider extends React.Component {
           };
         }
       }
-    });
+    }
   };
   progressiveLazyLoad = () => {
     let slidesToLoad = [];
@@ -390,8 +390,8 @@ export class InnerSlider extends React.Component {
     onLazyLoad && slidesToLoad.length > 0 && onLazyLoad(slidesToLoad);
     this.setState(state, () => {
       asNavFor &&
-        asNavFor.innerSlider.state.currentSlide !== currentSlide &&
-        asNavFor.innerSlider.slideHandler(index);
+      asNavFor.innerSlider.state.currentSlide !== currentSlide &&
+      asNavFor.innerSlider.slideHandler(index);
       if (!nextState) return;
       this.animationEndCallback = setTimeout(() => {
         const { animating, ...firstBatch } = nextState;
