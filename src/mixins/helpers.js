@@ -24,7 +24,12 @@ var helpers = {
       slideWidth = Math.ceil(getWidth(slickList))
     }
 
-    const slideHeight = getHeight(slickList.querySelector('[data-index="0"]'));
+    let slideHeight;
+    try {
+      slideHeight = getHeight(slickList.querySelector('[data-index="0"]'));
+    } catch (err) {
+      slideHeight = 0;
+    }
     const listHeight = slideHeight * props.slidesToShow;
 
     // pause slider if autoplay is set to false
