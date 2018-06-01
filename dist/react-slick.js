@@ -1384,7 +1384,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	      slideWidth = Math.ceil((0, _innerSliderUtils.getWidth)(slickList));
 	    }
 
-	    var slideHeight = (0, _innerSliderUtils.getHeight)(slickList.querySelector('[data-index="0"]'));
+	    var slideHeight = void 0;
+	    try {
+	      slideHeight = (0, _innerSliderUtils.getHeight)(slickList.querySelector('[data-index="0"]'));
+	    } catch (err) {
+	      slideHeight = 0;
+	    }
 	    var listHeight = slideHeight * props.slidesToShow;
 
 	    // pause slider if autoplay is set to false
